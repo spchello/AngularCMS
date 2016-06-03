@@ -1,19 +1,44 @@
-﻿@model IList<CMS.Domain.ViewModels.CustomerViewModel>
+﻿@*@model IList<CMS.Domain.ViewModels.CustomerViewModel>
 
-@{
-    ViewBag.Title = "Index";
-}
-
-<table>
-    @foreach (var item in Model)
-            {
-        <tr>
-            <td>@item.CustomerID</td>
-            <td>@item.ContactName</td>
-            <td>@item.CompanyName</td>
-        </tr>
+    @{
+        ViewBag.Title = "Index";
     }
-</table>
 
+    <table>
+        @foreach (var item in Model)
+                {
+            <tr>
+                <td>@item.CustomerID</td>
+                <td>@item.ContactName</td>
+                <td>@item.CompanyName</td>
+            </tr>
+        }
+    </table>*@
+
+
+<div ng-controller="CustCtrl">
+    <table>
+        <tr ng-repeat="item in Customers">
+            <td>{{item.CustomerID}}</td>
+            <td>{{item.ContactName}}</td>
+            <td>{{item.CompanyName}}</td>
+        </tr>
+    </table>
+    <div style="color:red;">
+        {{error}}
+    </div>
+</div>
+
+<script>
+    var MainApp = angular.module('MainApp', []);
+    MainApp.controller('CustCtrl', function ($scope, $http) {
+        $http.get('/api/Customer').success(function (data) {
+            $scope.Customers = data;
+        })
+        .error(function (data) {
+            $scope.error = "取得資料錯誤";
+        });
+    });
+</script>
 
 
