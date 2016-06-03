@@ -17,7 +17,11 @@
 
 
 <div ng-controller="CustCtrl">
-    <table>
+    <h3><i class="fa fa-table"></i>客戶資料</h3>
+<div ng-show="IsLoad" style="text-align:center;">
+    <i class="fa fa-spinner fa-spin fa-3x"></i> 讀取中...
+</div>
+    <table class="table table-bordered">
         <tr ng-repeat="item in Customers">
             <td>{{item.CustomerID}}</td>
             <td>{{item.ContactName}}</td>
@@ -32,8 +36,12 @@
 <script>
     var MainApp = angular.module('MainApp', []);
     MainApp.controller('CustCtrl', function ($scope, $http) {
+
+        $scope.IsLoad = true;
+
         $http.get('/api/Customer').success(function (data) {
             $scope.Customers = data;
+            $scope.IsLoad = false;
         })
         .error(function (data) {
             $scope.error = "取得資料錯誤";
