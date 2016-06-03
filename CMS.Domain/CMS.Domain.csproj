@@ -70,9 +70,6 @@
     <Compile Include="Customers.cs">
       <DependentUpon>CMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Employees.cs">
-      <DependentUpon>CMSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Orders.cs">
       <DependentUpon>CMSModel.tt</DependentUpon>
     </Compile>
@@ -80,17 +77,20 @@
     <Compile Include="ViewModels\CustomerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="CMSModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CMSModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
     <None Include="CMSModel.edmx.diagram">
       <DependentUpon>CMSModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="CMSModel.Context.tt">
@@ -103,9 +103,6 @@
       <DependentUpon>CMSModel.edmx</DependentUpon>
       <LastGenOutput>CMSModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
