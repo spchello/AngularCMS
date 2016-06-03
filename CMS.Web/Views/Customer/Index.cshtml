@@ -1,0 +1,19 @@
+﻿@model IList<CMS.Domain.ViewModels.CustomerViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<table>
+    @foreach (var item in Model)
+            {
+        <tr>
+            <td>@item.CustomerID</td>
+            <td>@item.ContactName</td>
+            <td>@item.CompanyName</td>
+        </tr>
+    }
+</table>
+
+
+
