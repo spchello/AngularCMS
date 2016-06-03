@@ -14,38 +14,79 @@
             </tr>
         }
     </table>*@
-
-
 <div ng-controller="CustCtrl">
     <h3><i class="fa fa-table"></i>客戶資料</h3>
-<div ng-show="IsLoad" style="text-align:center;">
-    <i class="fa fa-spinner fa-spin fa-3x"></i> 讀取中...
-</div>
+    <div ng-show="IsLoad"><i class="fa fa-table"></i>讀取中...</div>
     <table class="table table-bordered">
+        <tr>
+            <td>CustomerID</td>
+            <td>CompanyName</td>
+            <td>ContactName</td>
+        </tr>
         <tr ng-repeat="item in Customers">
             <td>{{item.CustomerID}}</td>
-            <td>{{item.ContactName}}</td>
             <td>{{item.CompanyName}}</td>
+            <td>{{item.ContactName}}</td>
         </tr>
     </table>
-    <div style="color:red;">
-        {{error}}
+    <pre>目前頁數:{{ currentPage }} 總筆數:{{ totalRecords }}</pre>
+    <uib-pagination boundary-links="true"
+                    total-items="totalRecords"
+                    ng-model="currentPage"
+                    class="pagination-sm"
+                    previous-text="上一頁"
+                    next-text="下一頁"
+                    first-text="第一頁"
+                    last-text="最後一頁"
+                    ng-change="pageChanged()">
+
+    </uib-pagination>
+    <div>
+        {{ error }}
     </div>
 </div>
 
+
 <script>
-    var MainApp = angular.module('MainApp', []);
+    var MainApp = angular.module('MainApp', ['ui.bootstrap']);
     MainApp.controller('CustCtrl', function ($scope, $http) {
 
         $scope.IsLoad = true;
 
-        $http.get('/api/Customer').success(function (data) {
-            $scope.Customers = data;
-            $scope.IsLoad = false;
-        })
-        .error(function (data) {
-            $scope.error = "取得資料錯誤";
-        });
+        //分頁所需參數
+        $scope.totalRecords = 0;
+        $scope.currentPage = 1;
+        $scope.pageSize = 10;
+
+        //點選換頁時觸發
+        $scope.pageChanged = function () {
+            $scope.IsLoad = true;
+            GetData();
+        };
+
+        var GetData = function () {
+            $http.get('/api/Customer', { params: { CurrPage: $scope.currentPage, PageSize: $scope.pageSize } })
+            .success(function (data) {
+                $scope.Customers = data.Data;
+                $scope.totalRecords = data.Total;
+                $scope.IsLoad = false;
+            })
+            .error(function (data) {
+                $scope.error = "取得資料錯誤!";
+                $scope.IsLoad = true;
+            });
+        };
+
+        //Page Load時去要資料
+        GetData();
+
+        //$http.get('/api/Customer').success(function (data) {
+        //    $scope.Customers = data;
+        //    $scope.IsLoad = false;
+        //})
+        //.error(function (data) {
+        //    $scope.error = "取得資料錯誤";
+        //});
     });
 </script>
 
