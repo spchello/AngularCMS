@@ -36,31 +36,25 @@ namespace CMS.Web.API
             }
         }
 
-        //// GET: api/Customer
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
+        [HttpGet]
+        //向BLL層要分頁的資料
+        public HttpResponseMessage Customers(int CurrPage, int PageSize)
+        {
+            try
+            {
+                //總數量
+                int TotalRaw = 0;
+                //向BLL取得資料
+                var datas = service.Get(CurrPage, PageSize, out TotalRaw);
+                //回傳一個JSON Object
+                var Rvl = new { Total = TotalRaw, Data = datas };
+                return Request.CreateResponse(HttpStatusCode.OK, Rvl);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message.ToString());
+            }
+        }
 
-        //// GET: api/Customer/5
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
-        //// POST: api/Customer
-        //public void Post([FromBody]string value)
-        //{
-        //}
-
-        //// PUT: api/Customer/5
-        //public void Put(int id, [FromBody]string value)
-        //{
-        //}
-
-        //// DELETE: api/Customer/5
-        //public void Delete(int id)
-        //{
-        //}
     }
 }
