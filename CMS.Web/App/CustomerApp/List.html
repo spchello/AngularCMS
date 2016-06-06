@@ -6,11 +6,16 @@
             <td>CustomerID</td>
             <td>CompanyName</td>
             <td>ContactName</td>
+            <td></td>
         </tr>
         <tr ng-repeat="item in Customers">
             <td>{{item.CustomerID}}</td>
             <td>{{item.CompanyName}}</td>
             <td>{{item.ContactName}}</td>
+            <td>
+                <input type="button" class="btn btn-success" value="修改" ng-click="Edit(item.CustomerID)" />
+                <input type="button" class="btn btn-danger" value="刪除" ng-click="Delete(item)" />
+            </td>
         </tr>
     </table>
     <pre>目前頁數:{{ currentPage }} 總筆數:{{ totalRecords }}</pre>
