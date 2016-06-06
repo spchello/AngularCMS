@@ -1,1 +1,1 @@
-﻿
+﻿var MainApp = angular.module('MainApp', ['ngRoute', 'ui.bootstrap']);
