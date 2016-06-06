@@ -47,47 +47,47 @@
 </div>
 
 
-<script>
-    var MainApp = angular.module('MainApp', ['ui.bootstrap']);
-    MainApp.controller('CustCtrl', function ($scope, $http) {
+@*<script>
+        var MainApp = angular.module('MainApp', ['ui.bootstrap']);
+        MainApp.controller('CustCtrl', function ($scope, $http) {
 
-        $scope.IsLoad = true;
-
-        //分頁所需參數
-        $scope.totalRecords = 0;
-        $scope.currentPage = 1;
-        $scope.pageSize = 10;
-
-        //點選換頁時觸發
-        $scope.pageChanged = function () {
             $scope.IsLoad = true;
-            GetData();
-        };
 
-        var GetData = function () {
-            $http.get('/api/Customer', { params: { CurrPage: $scope.currentPage, PageSize: $scope.pageSize } })
-            .success(function (data) {
-                $scope.Customers = data.Data;
-                $scope.totalRecords = data.Total;
-                $scope.IsLoad = false;
-            })
-            .error(function (data) {
-                $scope.error = "取得資料錯誤!";
+            //分頁所需參數
+            $scope.totalRecords = 0;
+            $scope.currentPage = 1;
+            $scope.pageSize = 10;
+
+            //點選換頁時觸發
+            $scope.pageChanged = function () {
                 $scope.IsLoad = true;
-            });
-        };
+                GetData();
+            };
 
-        //Page Load時去要資料
-        GetData();
+            var GetData = function () {
+                $http.get('/api/Customer', { params: { CurrPage: $scope.currentPage, PageSize: $scope.pageSize } })
+                .success(function (data) {
+                    $scope.Customers = data.Data;
+                    $scope.totalRecords = data.Total;
+                    $scope.IsLoad = false;
+                })
+                .error(function (data) {
+                    $scope.error = "取得資料錯誤!";
+                    $scope.IsLoad = true;
+                });
+            };
 
-        //$http.get('/api/Customer').success(function (data) {
-        //    $scope.Customers = data;
-        //    $scope.IsLoad = false;
-        //})
-        //.error(function (data) {
-        //    $scope.error = "取得資料錯誤";
-        //});
-    });
-</script>
+            //Page Load時去要資料
+            GetData();
+
+            //$http.get('/api/Customer').success(function (data) {
+            //    $scope.Customers = data;
+            //    $scope.IsLoad = false;
+            //})
+            //.error(function (data) {
+            //    $scope.error = "取得資料錯誤";
+            //});
+        });
+    </script>*@
 
 
