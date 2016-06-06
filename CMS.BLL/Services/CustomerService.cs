@@ -55,5 +55,27 @@ namespace CMS.BLL.Services
             return Mapper.Map<List<Customers>, List<CustomerViewModel>>(DbResult).AsQueryable();
         }
 
+
+        public void AddCustomer(CustomerViewModel models)
+        {
+            Mapper.CreateMap<CustomerViewModel, Customers>();
+            var cust = Mapper.Map<CustomerViewModel, Customers>(models);
+            db.Insert(cust);
+        }
+
+
+        public void SaveCustomer(CustomerViewModel models)
+        {
+            Mapper.CreateMap<CustomerViewModel, Customers>();
+            var cust = Mapper.Map<CustomerViewModel, Customers>(models);
+            db.Update(cust);
+        }
+
+        public void Delete(string CustomerID)
+        {
+            var Customer = db.GetByID(CustomerID);
+            db.Delete(Customer);
+        }
+
     }
 }
