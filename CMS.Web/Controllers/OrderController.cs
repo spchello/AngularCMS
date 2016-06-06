@@ -1,6 +1,7 @@
 ﻿using CMS.BLL.Services;
 using Microsoft.Reporting.WebForms;
 using Novacode;
+using NPOI.XSSF.UserModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -98,6 +99,64 @@ namespace CMS.Web.Controllers
             document.ReplaceText("{{CurrTime}}", DateTime.Now.ToShortTimeString());
             document.SaveAs(SavePath);
             return File(SavePath, "application/docx", "Report.docx");
+        }
+
+        public ActionResult UploadOrder()
+        {
+            return View();
+        }
+
+        //使用NPOI讀取Excel檔案中的Row Data
+        [HttpPost]
+        public ActionResult UploadOrder(IEnumerable<HttpPostedFileBase> UploadFile)
+        {
+            ViewBag.PageName = "請選擇檔案!";
+
+            //儲存檔案
+            foreach (var file in UploadFile)
+            {
+                if (file == null)
+                {
+                    ViewBag.Error = "副檔名錯誤，請下載樣板並上傳資料!";
+                    return View();
+                }
+
+                if (Path.GetExtension(file.FileName) != ".xlsx")
+                {
+                    return View();
+                }
+
+                MemoryStream ms = new MemoryStream();
+                file.InputStream.CopyTo(ms);
+                string FilePath = @"D:\";
+                file.InputStream.Position = 0;
+                string FileName = DateTime.Now.ToString("yyyyMMddhhmmssfff") + Path.GetExtension(file.FileName);
+                file.SaveAs(FilePath + FileName);
+                ms.Dispose();
+                ms.Close();
+
+                //NPOI讀取
+                XSSFWorkbook wb;
+                using (FileStream fs = new FileStream(FilePath + FileName, FileMode.Open, FileAccess.ReadWrite))
+                {
+                    wb = new XSSFWorkbook(fs);
+                    XSSFSheet MySheet;
+                    MySheet = (XSSFSheet)wb.GetSheetAt(0);
+
+                    //讀每筆資料 從1開始(跳過標提列)
+                    for (int i = 1; i <= MySheet.LastRowNum; i++)
+                    {
+                        XSSFRow Row = (XSSFRow)MySheet.GetRow(i);
+
+                        //讀取每欄資料
+                        for (int k = 0; k < Row.Cells.Count; k++)
+                        {
+                            string MyTemp = Row.GetCell(k).ToString();
+                        }
+                    }
+                }
+            }
+            return View();
         }
     }
 }
