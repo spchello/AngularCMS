@@ -15,6 +15,11 @@ MainApp.config(['$routeProvider', '$locationProvider', function ($routeProvider,
         controller: 'CustAddCtrl',
         templateUrl: viewBase + 'CustomerApp/AddCustomer.html'
     })
+    //編輯客戶
+    .when('/Customer/Edit/:id', {
+        controller: 'CustEditCtrl',
+        templateUrl: viewBase + 'CustomerApp/EditCustomer.html'
+    })
     
     $locationProvider.html5Mode(
        {
