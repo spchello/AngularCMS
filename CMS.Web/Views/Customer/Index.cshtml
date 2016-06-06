@@ -14,7 +14,7 @@
             </tr>
         }
     </table>*@
-<div ng-controller="CustCtrl">
+@*<div ng-controller="CustCtrl">
     <h3><i class="fa fa-table"></i>客戶資料</h3>
     <div ng-show="IsLoad"><i class="fa fa-table"></i>讀取中...</div>
     <table class="table table-bordered">
@@ -44,7 +44,7 @@
     <div>
         {{ error }}
     </div>
-</div>
+</div>*@
 
 
 @*<script>
@@ -91,3 +91,10 @@
     </script>*@
 
 
+<ul class="nav nav-pills">
+    <li class="active"><a href="/Customer">查詢</a></li>
+    <li class="active"><a href="/Customer/Add">新增客戶</a></li>
+</ul>
+
+@*ng-view內容做個切換*@
+<div ng-view></div>
