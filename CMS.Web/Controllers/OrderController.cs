@@ -1,6 +1,7 @@
 ﻿using CMS.BLL.Services;
 using Microsoft.Reporting.WebForms;
 using Novacode;
+using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using System;
 using System.Collections.Generic;
@@ -157,6 +158,48 @@ namespace CMS.Web.Controllers
                 }
             }
             return View();
+        }
+
+        //使用NPOI將資料庫資料匯出成自訂樣式的Excel檔案
+        public ActionResult ExportExcelByNPOI()
+        {
+            //資料來源 訂單資料
+            var models = OrderSevice.GetCustomerOrders();
+
+            //讀取樣版
+            string ExcelPath = Server.MapPath("~/Templates/ExportTemplete.xlsx");
+            FileStream Template = new FileStream(ExcelPath, FileMode.Open, FileAccess.Read);
+            IWorkbook workbook = new XSSFWorkbook(Template);
+            Template.Close();
+
+            ISheet _sheet = workbook.GetSheetAt(0);
+            //讀取Excel設定的字型樣式(第二列首欄)
+            ICellStyle cellStyle = _sheet.GetRow(1).Cells[0].CellStyle;
+
+            int CurrRow = 1; //起始列(跳過標題列)
+            foreach (var item in models)
+            {
+                IRow MyRow = _sheet.CreateRow(CurrRow);
+                CreateCell(item.OrderID.ToString(), MyRow, 0, cellStyle);
+                CreateCell(item.OrderDate.ToString(), MyRow, 1, cellStyle);
+                CreateCell(item.CustomerID.ToString(), MyRow, 2, cellStyle);
+                CreateCell(item.ContactName.ToString(), MyRow, 3, cellStyle);
+                CurrRow++;
+            }
+
+            string SavePath = @"D:/text.xlsx";
+            FileStream file = new FileStream(SavePath, FileMode.Create);
+            workbook.Write(file);
+            file.Close();
+
+            return File(SavePath, "application/excel", "Report.xlsx");
+        }
+
+        private static void CreateCell(string Word, IRow ContentRow, int CellIndex, ICellStyle cellStyleBorder)
+        {
+            ICell _cell = ContentRow.CreateCell(CellIndex);
+            _cell.SetCellValue(Word);
+            _cell.CellStyle = cellStyleBorder;
         }
     }
 }
