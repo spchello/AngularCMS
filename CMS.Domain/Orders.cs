@@ -30,5 +30,6 @@ namespace CMS.Domain
         public string ShipCountry { get; set; }
     
         public virtual Customers Customers { get; set; }
+        public virtual Employees Employees { get; set; }
     }
 }

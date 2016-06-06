@@ -27,5 +27,6 @@ namespace CMS.Domain
     
         public virtual DbSet<Customers> Customers { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<Employees> Employees { get; set; }
     }
 }

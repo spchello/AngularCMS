@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CMS.Domain.ViewModels
 {
-    class EmpOrdersViewModel
+    public class EmpOrdersViewModel
     {
         //員工編號PK
         public int EmplyeeID { get; set; }

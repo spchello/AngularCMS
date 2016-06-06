@@ -70,6 +70,9 @@
     <Compile Include="Customers.cs">
       <DependentUpon>CMSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Employees.cs">
+      <DependentUpon>CMSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Orders.cs">
       <DependentUpon>CMSModel.tt</DependentUpon>
     </Compile>
