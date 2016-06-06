@@ -82,6 +82,7 @@
     </Compile>
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\EmpOrdersViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config">
