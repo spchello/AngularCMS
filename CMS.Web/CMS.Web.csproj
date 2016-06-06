@@ -262,6 +262,7 @@
     <Content Include="App\CustomerApp\List.html" />
     <Content Include="App\DashBoardApp\dashBoardController.js" />
     <Content Include="App\DashBoardApp\dashBoardService.js" />
+    <Content Include="App\DashBoardApp\Index.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
