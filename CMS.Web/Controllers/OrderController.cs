@@ -1,5 +1,6 @@
 ﻿using CMS.BLL.Services;
 using Microsoft.Reporting.WebForms;
+using Novacode;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -82,6 +83,21 @@ namespace CMS.Web.Controllers
 
             // 回傳檔案 (Excel xls/ pdf pdf/word doc)
             return File(renderedBytes, mineType, "Report." + fileType);
+        }
+
+        //製作Word客製化報表, 使用DocX
+        public ActionResult ExportByDocx()
+        {
+            //樣板路徑
+            string TemplatePath = Server.MapPath("~/Templates/TestTemplate.docx");
+            //儲存路徑
+            string SavePath = @"D:/test.docx";
+            DocX document = DocX.Load(TemplatePath);
+            document.ReplaceText("{{OrderNumber}}", "555555");
+            document.ReplaceText("{{Name}}", "Kyle");
+            document.ReplaceText("{{CurrTime}}", DateTime.Now.ToShortTimeString());
+            document.SaveAs(SavePath);
+            return File(SavePath, "application/docx", "Report.docx");
         }
     }
 }
