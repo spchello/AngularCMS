@@ -60,7 +60,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Order ID</Value>
+                              <Value>訂單編號</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -90,7 +90,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Order Date</Value>
+                              <Value>訂單日期</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -120,7 +120,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Customer ID</Value>
+                              <Value>客戶編號</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -150,7 +150,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Contact Name</Value>
+                              <Value>聯絡人</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
