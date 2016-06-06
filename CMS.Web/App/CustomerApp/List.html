@@ -1,0 +1,31 @@
+﻿<div>
+    <h3><i class="fa fa-table"></i>客戶資料</h3>
+    <div ng-show="IsLoad"><i class="fa fa-table"></i>讀取中...</div>
+    <table class="table table-bordered">
+        <tr>
+            <td>CustomerID</td>
+            <td>CompanyName</td>
+            <td>ContactName</td>
+        </tr>
+        <tr ng-repeat="item in Customers">
+            <td>{{item.CustomerID}}</td>
+            <td>{{item.CompanyName}}</td>
+            <td>{{item.ContactName}}</td>
+        </tr>
+    </table>
+    <pre>目前頁數:{{ currentPage }} 總筆數:{{ totalRecords }}</pre>
+    <uib-pagination boundary-links="true"
+                    total-items="totalRecords"
+                    ng-model="currentPage"
+                    class="pagination-sm"
+                    previous-text="上一頁"
+                    next-text="下一頁"
+                    first-text="第一頁"
+                    last-text="最後一頁"
+                    ng-change="pageChanged()">
+
+    </uib-pagination>
+    <div>
+        {{ error }}
+    </div>
+</div>
