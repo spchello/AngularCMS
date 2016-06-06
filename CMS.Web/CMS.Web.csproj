@@ -1224,6 +1224,7 @@
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Templates\TestTemplate.docx" />
     <Content Include="Views\Order\UploadOrder.cshtml" />
+    <Content Include="Templates\ExportTemplete.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
