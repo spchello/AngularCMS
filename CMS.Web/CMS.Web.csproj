@@ -253,6 +253,7 @@
   <ItemGroup>
     <Content Include="App\app.js" />
     <Content Include="App\CustomerApp\AddCustomer.html" />
+    <Content Include="App\CustomerApp\customerAddController.js" />
     <Content Include="App\CustomerApp\CustomerController.js" />
     <Content Include="App\CustomerApp\CustomerService.js" />
     <Content Include="App\CustomerApp\List.html" />
