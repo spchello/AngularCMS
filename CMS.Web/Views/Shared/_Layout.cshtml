@@ -9,14 +9,22 @@
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
     <script src="~/Scripts/angular.min.js"></script>
+    @*signalR*@
+    <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
+    <script src="~/signalr/hubs"></script>
+    @*route*@
     <script src="~/Scripts/angular-route.js"></script>
     <script src="~/Scripts/angular-resource.js"></script>
+    @*ui-bootstrap*@
     <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+
     <script src="~/App/app.js"></script>
+    @*customer*@
     <script src="~/App/CustomerApp/customerService.js"></script>
     <script src="~/App/CustomerApp/customerController.js"></script>
     <script src="~/App/CustomerApp/customerAddController.js"></script>
     <script src="~/App/CustomerApp/customerEditController.js"></script>
+    @*dashBoard*@
     <script src="~/App/DashBoardApp/dashBoardService.js"></script>
     <script src="~/App/DashBoardApp/dashBoardController.js"></script>
 
@@ -31,13 +39,31 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("應用程式名稱", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("客戶管理系統", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("首頁", "Index", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
+                    <li>
+                        <a href="/">訂單狀況</a>
+                    </li>
+                    <li>
+                        <a href="/Customer">客戶管理</a>
+                    </li>
+                    <li>
+                        <a href="/Order/Index">訂單列表</a>
+                    </li>
+                    <li>
+                        <a href="/Order/ExportByDocx">匯出Word(DocX套件)</a>
+                    </li>
+                    <li>
+                        <a href="/Order/UploadOrder">讀取Excel(NPOI套件)</a>
+                    </li>
+                    <li>
+                        <a href="/Order/ExportExcelByNPOI">匯出Excel(NPOI套件)</a>
+                    </li>
                 </ul>
+                @* @Html.MvcSiteMap().Menu("BootstrapMenuHelperModel", false) *@
+                @Html.MvcSiteMap().Menu()
             </div>
         </div>
     </div>

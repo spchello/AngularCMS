@@ -20,10 +20,10 @@ MainApp.config(['$routeProvider', '$locationProvider', function ($routeProvider,
         controller: 'CustEditCtrl',
         templateUrl: viewBase + 'CustomerApp/EditCustomer.html'
     })
-    .otherwise({
-        controller: 'DashBoardCtrl',
-        templateUrl: viewBase + 'DashBoardApp/Index.html'
-    });
+    //.otherwise({
+    //    controller: 'DashBoardCtrl',
+    //    templateUrl: viewBase + 'DashBoardApp/Index.html'
+    //});
     
     $locationProvider.html5Mode(
        {
