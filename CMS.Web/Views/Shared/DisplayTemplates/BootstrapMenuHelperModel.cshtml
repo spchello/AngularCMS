@@ -1,0 +1,73 @@
+﻿@model MvcSiteMapProvider.Web.Html.Models.SiteMapHelperModel
+@using System.Web.Mvc.Html
+@using MvcSiteMapProvider.Web.Html.Models
+
+@*自訂bootstrap的選單樣式*@
+
+@*傳入所有選單樣式並跑回圈，
+ul 有套入bootstrap的class，
+而如果該選單又有子項目的話，
+則跑另一個Helper來秀出子選單(DropDownMenu)*@
+
+@helper  TopMenu(List<SiteMapNodeModel> nodeList)
+{
+    <ul class="nav navbar-nav">
+        @foreach (SiteMapNodeModel node in nodeList)
+        {
+            string url = node.IsClickable ? node.Url : "#";
+
+            if (!node.Children.Any())
+            {
+                <li><a href="@url">@node.Title</a></li>
+            }
+            else
+            {
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="@url">@node.Title <b class="caret"></b></a>@DropDownMenu(node.Children)</li>
+            }
+
+            if (node != nodeList.Last())
+            {
+                <li class="divider-vertical"></li>
+            }
+        }
+    </ul>
+}
+
+
+
+@*DropDownMenu helper
+跑所有子選單並套入bootstrap的class，
+如果還有下一層的話，則呼叫自己這個方法，
+相信有寫過程式的人應該都不陌生，
+這就是一種遞迴跑出無限層樹狀結構的概念。*@
+
+@helper DropDownMenu(SiteMapNodeModelList nodeList)
+{
+    <ul class="dropdown-menu">
+        @foreach (SiteMapNodeModel node in nodeList)
+        {
+            if (node.Title == "Separator")
+            {
+                @:
+                <li class="divider"></li>
+                continue;
+            }
+
+            string url = node.IsClickable ? node.Url : "#";
+
+            if (!node.Children.Any())
+            {
+                @:
+                <li><a href="@url">@node.Title</a></li>
+            }
+            else
+            {
+                @:
+                <li class="dropdown-submenu"><a href="@url">@node.Title</a>@DropDownMenu(node.Children)</li>
+            }
+        }
+    </ul>
+}
+
+
+@TopMenu(Model.Nodes)
